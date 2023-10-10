@@ -21,6 +21,8 @@ namespace NewNerdStore.Catalogos.Domain
             Valor = valor;
             DataCadastro = dataCadastro;
             Imagem = imagem;
+
+            Validar();
         }
 
         protected Produto() : base() { }
@@ -76,27 +78,13 @@ namespace NewNerdStore.Catalogos.Domain
         #region Validate
         public void Validar()
         {
-
+            Validations.ValidarSeVazio(Nome, "O campo Nome do produto não pode estar vazio");
+            Validations.ValidarSeVazio(Descricao, "O campo Descricao do produto não pode estar vazio");
+            Validations.ValidarSeIgual(CategoriaId, Guid.Empty, "O campo CategoriaId do produto não pode estar vazio");
+            Validations.ValidarSeMenorQue(Valor, 1, "O campo Valor do produto não pode se menor igual a 0");
+            Validations.ValidarSeVazio(Imagem, "O campo Imagem do produto não pode estar vazio");
         }
         #endregion
 
-    }
-
-    public class Categoria : Entity
-    {
-        public Categoria(string nome, string codigo)
-        {
-            Nome = nome;
-            Codigo = codigo;
-        }
-
-        protected Categoria(): base() { }
-
-        public string Nome { get; private set; }
-
-        public string Codigo { get; private set; }
-
-        public override string ToString() 
-            => $"{Nome} - {Codigo}";
     }
 }
