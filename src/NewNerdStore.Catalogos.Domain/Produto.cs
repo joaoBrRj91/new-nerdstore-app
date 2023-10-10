@@ -12,15 +12,19 @@ namespace NewNerdStore.Catalogos.Domain
             decimal valor,
             DateTime dataCadastro,
             string imagem,
-            int quantidadeEstoque,
-            Guid categoriaId)
+            Guid categoriaId,
+            Dimensoes dimensoes,
+            int quantidadeEstoque = 0)
         {
+            CategoriaId = categoriaId;
             Nome = nome;
             Descricao = descricao;
             Ativo = ativo;
             Valor = valor;
+            QuantidadeEstoque = quantidadeEstoque;
             DataCadastro = dataCadastro;
             Imagem = imagem;
+            Dimensoes = dimensoes;
 
             Validar();
         }
@@ -43,7 +47,9 @@ namespace NewNerdStore.Catalogos.Domain
 
         public int QuantidadeEstoque { get; private set; }
 
-        public Guid  CategoriaId { get; private set; }
+        public Guid CategoriaId { get; private set; }
+
+        public Dimensoes Dimensoes { get; private set; }
 
         public Categoria Categoria { get; private set; }
         #endregion
@@ -56,7 +62,7 @@ namespace NewNerdStore.Catalogos.Domain
         public void AlterarCategoria(Categoria categoria)
         {
             Categoria = categoria;
-            CategoriaId = categoria.Id; 
+            CategoriaId = categoria.Id;
         }
 
         public void DebitarEstoque(int quantidade)
@@ -72,7 +78,7 @@ namespace NewNerdStore.Catalogos.Domain
         }
 
         public bool PossuiEstoque(int quantidade)
-            => QuantidadeEstoque>= quantidade;
+            => QuantidadeEstoque >= quantidade;
         #endregion
 
         #region Validate
