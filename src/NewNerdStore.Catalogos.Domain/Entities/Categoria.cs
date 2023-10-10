@@ -1,6 +1,6 @@
 ﻿using NewNerdStore.Core.DomainObjects;
 
-namespace NewNerdStore.Catalogos.Domain
+namespace NewNerdStore.Catalogos.Domain.Entities
 {
     public class Categoria : Entity
     {
@@ -12,13 +12,13 @@ namespace NewNerdStore.Catalogos.Domain
             Validar();
         }
 
-        protected Categoria(): base() { }
+        protected Categoria() : base() { }
 
         public string Nome { get; private set; }
 
         public string Codigo { get; private set; }
 
-        public override string ToString() 
+        public override string ToString()
             => $"{Nome} - {Codigo}";
 
         public void Validar()

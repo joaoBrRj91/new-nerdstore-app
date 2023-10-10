@@ -1,6 +1,7 @@
-﻿using NewNerdStore.Core.DomainObjects;
+﻿using NewNerdStore.Catalogos.Domain.ValueObjects;
+using NewNerdStore.Core.DomainObjects;
 
-namespace NewNerdStore.Catalogos.Domain
+namespace NewNerdStore.Catalogos.Domain.Entities
 {
     public class Produto : Entity, IAggregateRoot
     {

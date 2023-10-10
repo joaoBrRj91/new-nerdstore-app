@@ -1,6 +1,6 @@
 ﻿using NewNerdStore.Core.DomainObjects;
 
-namespace NewNerdStore.Catalogos.Domain
+namespace NewNerdStore.Catalogos.Domain.ValueObjects
 {
     public class Dimensoes
     {
@@ -27,10 +27,10 @@ namespace NewNerdStore.Catalogos.Domain
         #endregion
 
         #region Ad-hoc Getters
-        public string DescricaoFormatada() 
+        public string DescricaoFormatada()
             => $"LxAxP: {Largura} x {Altura} x {Profundidade}";
 
-        public override string ToString() 
+        public override string ToString()
             => DescricaoFormatada();
         #endregion
 
