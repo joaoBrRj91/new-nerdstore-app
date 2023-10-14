@@ -20,10 +20,8 @@ namespace NewNerdStore.Catalogos.Domain.ValueObjects
 
         #region Properties
         public decimal Altura { get; private set; }
-
         public decimal Largura { get; private set; }
-
-        public decimal Profundidade { private get; set; }
+        public decimal Profundidade {  get; private set; }
         #endregion
 
         #region Ad-hoc Getters
