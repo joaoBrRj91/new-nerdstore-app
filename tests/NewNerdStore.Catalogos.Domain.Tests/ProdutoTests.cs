@@ -1,3 +1,5 @@
+using NewNerdStore.Catalogos.Domain.Entities;
+using NewNerdStore.Catalogos.Domain.ValueObjects;
 using NewNerdStore.Core.DomainObjects;
 
 namespace NewNerdStore.Catalogos.Domain.Tests
