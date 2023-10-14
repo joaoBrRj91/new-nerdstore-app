@@ -1,16 +1,19 @@
 ﻿using NewNerdStore.Catalogos.Domain.DomainServices.Interfaces;
+using NewNerdStore.Catalogos.Domain.Events;
 using NewNerdStore.Catalogos.Domain.Interfaces.Repositories;
-using System.Security.AccessControl;
+using NewNerdStore.Core.Bus;
 
 namespace NewNerdStore.Catalogos.Domain.DomainServices
 {
     public class EstoqueService : IEstoqueService
     {
         private readonly IProdutoRepository _produtoRepository;
+        private readonly IMediatorHandler _bus;
 
-        public EstoqueService(IProdutoRepository produtoRepository)
+        public EstoqueService(IProdutoRepository produtoRepository, IMediatorHandler bus)
         {
             this._produtoRepository = produtoRepository;
+            this._bus = bus;
         }
 
         public async Task<bool> DebitarEstoque(Guid produtoId, int quantidade)
@@ -22,6 +25,11 @@ namespace NewNerdStore.Catalogos.Domain.DomainServices
             if (!produto.PossuiEstoque(quantidade)) return false;
 
             produto.DebitarEstoque(quantidade);
+
+            //TODO: Parametrizar a quantidade de estoque baixo
+            if (produto.QuantidadeEstoque < 10)
+               await _bus.PublishEvent(new ProdutoAbaixoEstoqueEvent
+                   (aggregateId: produto.Id, quantidadeRestante: produto.QuantidadeEstoque));
 
             _produtoRepository.Atualizar(produto);
 
