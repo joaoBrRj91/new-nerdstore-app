@@ -5,6 +5,7 @@ using NewNerdStore.Core.Bus;
 
 namespace NewNerdStore.Catalogos.Domain.DomainServices
 {
+    //TODO : Domain services fazem parte da linguagem ubiqua; a definição do workflow de um domain service é definido pelo domain expert
     public class EstoqueService : IEstoqueService
     {
         private readonly IProdutoRepository _produtoRepository;
@@ -48,6 +49,6 @@ namespace NewNerdStore.Catalogos.Domain.DomainServices
             return await _produtoRepository.UnitOfWork.Commit();
         }
 
-        public void Dispose() => _produtoRepository.Dispose();
+        public void Dispose() => _produtoRepository?.Dispose();
     }
 }
