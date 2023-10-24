@@ -3,11 +3,11 @@ using NewNerdStore.Core.Events;
 
 namespace NewNerdStore.Core.Bus
 {
-    public class MediatorHandler : IMediatorHandler
+    public class DomainMediatorHandler : IDomainMediatorHandler
     {
         private readonly IMediator _mediator;
 
-        public MediatorHandler(IMediator mediator)
+        public DomainMediatorHandler(IMediator mediator)
         {
             _mediator = mediator;
         }

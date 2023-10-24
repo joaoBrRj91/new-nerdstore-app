@@ -9,9 +9,9 @@ namespace NewNerdStore.Catalogos.Domain.DomainServices
     public class EstoqueService : IEstoqueService
     {
         private readonly IProdutoRepository _produtoRepository;
-        private readonly IMediatorHandler _bus;
+        private readonly IDomainMediatorHandler _bus;
 
-        public EstoqueService(IProdutoRepository produtoRepository, IMediatorHandler bus)
+        public EstoqueService(IProdutoRepository produtoRepository, IDomainMediatorHandler bus)
         {
             this._produtoRepository = produtoRepository;
             this._bus = bus;

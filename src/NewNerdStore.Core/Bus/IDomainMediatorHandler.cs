@@ -2,7 +2,7 @@
 
 namespace NewNerdStore.Core.Bus
 {
-    public interface IMediatorHandler
+    public interface IDomainMediatorHandler
     {
         Task PublishEvent<T>(T @event) where T : Event;
     }
