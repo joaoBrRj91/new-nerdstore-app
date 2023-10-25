@@ -24,4 +24,8 @@
     <ProjectReference Include="..\NewNerdStore.Catalogos.Application\NewNerdStore.Catalogos.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\AdminProdutos\" />
+  </ItemGroup>
+
 </Project>
