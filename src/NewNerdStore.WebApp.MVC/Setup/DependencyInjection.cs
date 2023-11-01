@@ -7,6 +7,9 @@ using NewNerdStore.Catalogos.Infra.Repositories;
 using NewNerdStore.Core.Bus;
 using Microsoft.EntityFrameworkCore;
 using NewNerdStore.Catalogos.Infra.Contexts;
+using MediatR;
+using NewNerdStore.Catalogos.Domain.Events;
+using NewNerdStore.Catalogos.Domain.Events.Handlers;
 
 namespace NewNerdStore.WebApp.MVC.Setup
 {
@@ -18,6 +21,10 @@ namespace NewNerdStore.WebApp.MVC.Setup
             services.AddScoped<IDomainMediatorHandler, DomainMediatorHandler>();
             #endregion
 
+            #region Domain Events Notifications Handlers (Mediator)
+            services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, ProdutoAbaixoEstoqueEventHandler>();
+            #endregion
+
             #region Bounded Context Catalogos
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IProdutoAppService, ProdutoAppService>();
@@ -25,8 +32,7 @@ namespace NewNerdStore.WebApp.MVC.Setup
             services.AddDbContext<CatalogoContext>(options =>
              options.UseSqlServer(connectionString));
             #endregion
-
-
+         
         }
     }
 }
