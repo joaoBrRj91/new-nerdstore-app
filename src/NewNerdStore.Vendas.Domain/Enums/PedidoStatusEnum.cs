@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace NewNerdStore.Vendas.Domain.Enums
 {
-    internal enum PedidoStatusEnum
+    public enum PedidoStatusEnum
     {
+        Rascunho,
+        Iniciado,
+        Pago,
+        Entregue,
+        Cancelado,
     }
 }

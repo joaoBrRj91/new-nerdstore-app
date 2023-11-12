@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace NewNerdStore.Vendas.Domain.Enums
 {
-    internal enum TipoDescontoVoucherEnum
+    public enum TipoDescontoVoucherEnum
     {
+        Porcentagem,
+        Valor
     }
 }
