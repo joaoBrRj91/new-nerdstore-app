@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="CQRS\Events\" />
+    <Folder Include="CQRS\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NewNerdStore.Core\NewNerdStore.Core.csproj" />
+  </ItemGroup>
+
 </Project>
