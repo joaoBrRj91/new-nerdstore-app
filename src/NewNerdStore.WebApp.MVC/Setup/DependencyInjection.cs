@@ -10,6 +10,7 @@ using NewNerdStore.Catalogos.Infra.Contexts;
 using MediatR;
 using NewNerdStore.Catalogos.Domain.Events;
 using NewNerdStore.Catalogos.Domain.Events.Handlers;
+using NewNerdStore.Vendas.Application.CQRS.Commands;
 
 namespace NewNerdStore.WebApp.MVC.Setup
 {
@@ -32,7 +33,11 @@ namespace NewNerdStore.WebApp.MVC.Setup
             services.AddDbContext<CatalogoContext>(options =>
              options.UseSqlServer(connectionString));
             #endregion
-         
+
+            #region Bounded Context Vendas
+            services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
+            #endregion
+
         }
     }
 }

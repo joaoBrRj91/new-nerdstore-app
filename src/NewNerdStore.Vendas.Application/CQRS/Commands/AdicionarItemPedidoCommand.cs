@@ -1,4 +1,5 @@
 ﻿using NewNerdStore.Core.Events.Messages;
+using NewNerdStore.Vendas.Application.CQRS.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +29,11 @@ namespace NewNerdStore.Vendas.Application.CQRS.Commands
         public string Nome { get; private set; }
         public int Quantidade { get; private set; }
         public decimal ValorUnitario { get; private set; }
+
+        public override bool EhValido()
+        {
+            ValidationResult = new AdicionarItemPedidoCommandValidation().Validate(this);
+            return ValidationResult.IsValid;
+        }
     }
 }

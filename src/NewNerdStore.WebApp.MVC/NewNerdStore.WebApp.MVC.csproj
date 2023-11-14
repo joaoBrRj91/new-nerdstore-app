@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NewNerdStore.Catalogos.Application\NewNerdStore.Catalogos.Application.csproj" />
+    <ProjectReference Include="..\NewNerdStore.Vendas.Application\NewNerdStore.Vendas.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
