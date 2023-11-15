@@ -15,7 +15,7 @@ namespace NewNerdStore.Vendas.Application.CQRS.Validations
                 .NotEqual(Guid.Empty)
                 .WithMessage("Id do produto inválido");
 
-            RuleFor(c => c.Nome)
+            RuleFor(c => c.ProdutoNome)
                 .NotEmpty()
                 .WithMessage("O nome do produto não foi informado");
 

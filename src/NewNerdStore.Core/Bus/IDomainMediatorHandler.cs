@@ -1,4 +1,4 @@
-﻿using NewNerdStore.Core.Events;
+﻿using NewNerdStore.Core.Events.Bases;
 
 namespace NewNerdStore.Core.Bus
 {

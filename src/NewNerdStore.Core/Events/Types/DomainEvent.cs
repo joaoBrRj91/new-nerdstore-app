@@ -1,4 +1,6 @@
-﻿namespace NewNerdStore.Core.Events.Types
+﻿using NewNerdStore.Core.Events.Bases;
+
+namespace NewNerdStore.Core.Events.Types
 {
     public class DomainEvent : Event
     {

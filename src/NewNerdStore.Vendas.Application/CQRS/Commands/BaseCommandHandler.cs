@@ -1,4 +1,4 @@
-﻿using NewNerdStore.Core.Events.Messages;
+﻿using NewNerdStore.Core.Events.Types;
 
 namespace NewNerdStore.Vendas.Application.CQRS.Commands
 {

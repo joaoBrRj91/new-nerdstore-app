@@ -11,6 +11,9 @@ using MediatR;
 using NewNerdStore.Catalogos.Domain.Events;
 using NewNerdStore.Catalogos.Domain.Events.Handlers;
 using NewNerdStore.Vendas.Application.CQRS.Commands;
+using NewNerdStore.Vendas.Domain.Interfaces.Repositories;
+using NerdStore.Vendas.Infra.Repository;
+using NerdStore.Vendas.Infra;
 
 namespace NewNerdStore.WebApp.MVC.Setup
 {
@@ -20,13 +23,15 @@ namespace NewNerdStore.WebApp.MVC.Setup
         {
             #region Bus (Mediator)
             services.AddScoped<IDomainMediatorHandler, DomainMediatorHandler>();
+            services.AddScoped<ICommandMediatorHandler, CommandMediatorHandler>();
             #endregion
+
+            #region Bounded Context Catalogos
 
             #region Domain Events Notifications Handlers (Mediator)
             services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, ProdutoAbaixoEstoqueEventHandler>();
             #endregion
-
-            #region Bounded Context Catalogos
+           
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IProdutoAppService, ProdutoAppService>();
             services.AddScoped<IEstoqueService, EstoqueService>();
@@ -35,7 +40,14 @@ namespace NewNerdStore.WebApp.MVC.Setup
             #endregion
 
             #region Bounded Context Vendas
+
+            #region Commands/Queries Handlers (Mediator)
             services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
+            #endregion
+
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddDbContext<VendasContext>(options =>
+             options.UseSqlServer(connectionString));
             #endregion
 
         }

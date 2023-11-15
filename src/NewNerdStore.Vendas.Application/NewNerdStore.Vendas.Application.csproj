@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NewNerdStore.Core\NewNerdStore.Core.csproj" />
+    <ProjectReference Include="..\NewNerdStore.Vendas.Domain\NewNerdStore.Vendas.Domain.csproj" />
+    <ProjectReference Include="..\NewNerdStore.Vendas.Infra\NewNerdStore.Vendas.Infra.csproj" />
   </ItemGroup>
 
 </Project>

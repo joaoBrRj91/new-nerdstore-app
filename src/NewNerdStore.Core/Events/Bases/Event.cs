@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewNerdStore.Core.Events
+namespace NewNerdStore.Core.Events.Bases
 {
     public abstract class Event : Message, INotification
     {
