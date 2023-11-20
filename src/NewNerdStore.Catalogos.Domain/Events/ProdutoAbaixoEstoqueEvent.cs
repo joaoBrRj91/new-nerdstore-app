@@ -1,4 +1,4 @@
-﻿using NewNerdStore.Core.Events.Types;
+﻿using NewNerdStore.Core.Messages.Commons.DomainEvents;
 
 namespace NewNerdStore.Catalogos.Domain.Events
 {

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NewNerdStore.Core.Bus;
 using NewNerdStore.Core.Data;
-using NewNerdStore.Core.Events.Bases;
+using NewNerdStore.Core.Messages.Abstracts;
 using NewNerdStore.Vendas.Domain.Entities;
 using System;
 using System.Linq;

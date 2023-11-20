@@ -1,10 +1,9 @@
 ﻿using MediatR;
-using NewNerdStore.Core.Events;
 using NewNerdStore.Vendas.Domain.Entities;
 using NewNerdStore.Vendas.Domain.Factories;
 using NewNerdStore.Vendas.Domain.Interfaces.Repositories;
 
-namespace NewNerdStore.Vendas.Application.CQRS.Commands
+namespace NewNerdStore.Vendas.Application.Comunication.Commands
 {
     public class PedidoCommandHandler : BaseCommandHandler<AdicionarItemPedidoCommand>, IRequestHandler<AdicionarItemPedidoCommand, bool>
     {
@@ -27,7 +26,7 @@ namespace NewNerdStore.Vendas.Application.CQRS.Commands
             else
                 GerenciarItemPedido(pedido, pedidoItem);
 
-            return await _pedidoRepository.UnitOfWork.Commit(); 
+            return await _pedidoRepository.UnitOfWork.Commit();
 
         }
 

@@ -4,16 +4,17 @@ using NewNerdStore.Catalogos.Domain.DomainServices.Interfaces;
 using NewNerdStore.Catalogos.Domain.DomainServices;
 using NewNerdStore.Catalogos.Domain.Interfaces.Repositories;
 using NewNerdStore.Catalogos.Infra.Repositories;
-using NewNerdStore.Core.Bus;
 using Microsoft.EntityFrameworkCore;
 using NewNerdStore.Catalogos.Infra.Contexts;
 using MediatR;
 using NewNerdStore.Catalogos.Domain.Events;
 using NewNerdStore.Catalogos.Domain.Events.Handlers;
-using NewNerdStore.Vendas.Application.CQRS.Commands;
 using NewNerdStore.Vendas.Domain.Interfaces.Repositories;
 using NerdStore.Vendas.Infra.Repository;
 using NerdStore.Vendas.Infra;
+using NewNerdStore.Core.Comunications.Mediator;
+using NewNerdStore.Vendas.Application.Comunication.Commands;
+using NewNerdStore.Core.Messages.Commons.Notifications;
 
 namespace NewNerdStore.WebApp.MVC.Setup
 {
@@ -21,14 +22,19 @@ namespace NewNerdStore.WebApp.MVC.Setup
     {
         public static void RegisterServices(this IServiceCollection services, string connectionString)
         {
-            #region Bus (Mediator)
+            #region Bus/Mediator
             services.AddScoped<IDomainMediatorHandler, DomainMediatorHandler>();
             services.AddScoped<ICommandMediatorHandler, CommandMediatorHandler>();
+
+            #region Notifications
+            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
+            #endregion
+
             #endregion
 
             #region Bounded Context Catalogos
 
-            #region Domain Events Notifications Handlers (Mediator)
+            #region Domain Events Handlers (Mediator)
             services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, ProdutoAbaixoEstoqueEventHandler>();
             #endregion
            

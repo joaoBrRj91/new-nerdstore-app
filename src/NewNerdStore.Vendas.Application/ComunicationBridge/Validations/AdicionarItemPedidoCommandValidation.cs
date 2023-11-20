@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using NewNerdStore.Vendas.Application.CQRS.Commands;
+using NewNerdStore.Vendas.Application.Comunication.Commands;
 
-namespace NewNerdStore.Vendas.Application.CQRS.Validations
+namespace NewNerdStore.Vendas.Application.Comunication.Validations
 {
     public class AdicionarItemPedidoCommandValidation : AbstractValidator<AdicionarItemPedidoCommand>
     {

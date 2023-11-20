@@ -1,6 +1,6 @@
-﻿using NewNerdStore.Core.Events.Bases;
+﻿using NewNerdStore.Core.Messages.Abstracts;
 
-namespace NewNerdStore.Core.Events.Types
+namespace NewNerdStore.Core.Messages.Commons.DomainEvents
 {
     public class DomainEvent : Event
     {

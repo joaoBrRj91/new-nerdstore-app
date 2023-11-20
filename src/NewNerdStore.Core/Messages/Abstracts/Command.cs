@@ -1,13 +1,12 @@
 ﻿using FluentValidation.Results;
 using MediatR;
-using NewNerdStore.Core.Events.Bases;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewNerdStore.Core.Events.Types
+namespace NewNerdStore.Core.Messages.Abstracts
 {
     public abstract class Command : Message, IRequest<bool>
     {

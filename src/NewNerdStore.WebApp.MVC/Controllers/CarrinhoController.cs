@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NewNerdStore.Catalogos.Application.AppServices.Interfaces;
-using NewNerdStore.Core.Bus;
-using NewNerdStore.Vendas.Application.CQRS.Commands;
+using NewNerdStore.Core.Comunications.Mediator;
+using NewNerdStore.Vendas.Application.Comunication.Commands;
 
 namespace NewNerdStore.WebApp.MVC.Controllers
 {

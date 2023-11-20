@@ -1,4 +1,4 @@
-﻿namespace NewNerdStore.Core.Events.Bases
+﻿namespace NewNerdStore.Core.Messages.Abstracts
 {
     public abstract class Message
     {

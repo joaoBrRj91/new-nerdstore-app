@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="CQRS\Events\" />
-    <Folder Include="CQRS\Queries\" />
+    <Folder Include="ComunicationBridge\Events\" />
+    <Folder Include="ComunicationBridge\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

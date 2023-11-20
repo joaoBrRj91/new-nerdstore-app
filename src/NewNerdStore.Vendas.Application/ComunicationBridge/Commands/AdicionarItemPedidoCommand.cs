@@ -1,7 +1,7 @@
-﻿using NewNerdStore.Core.Events.Types;
-using NewNerdStore.Vendas.Application.CQRS.Validations;
+﻿using NewNerdStore.Core.Messages.Abstracts;
+using NewNerdStore.Vendas.Application.Comunication.Validations;
 
-namespace NewNerdStore.Vendas.Application.CQRS.Commands
+namespace NewNerdStore.Vendas.Application.Comunication.Commands
 {
     public class AdicionarItemPedidoCommand : Command
     {

@@ -1,13 +1,13 @@
-﻿using NewNerdStore.Core.Events.Types;
+﻿using NewNerdStore.Core.Messages.Abstracts;
 
-namespace NewNerdStore.Vendas.Application.CQRS.Commands
+namespace NewNerdStore.Vendas.Application.Comunication.Commands
 {
-    public abstract class BaseCommandHandler<T> where  T : Command
+    public abstract class BaseCommandHandler<T> where T : Command
     {
 
         protected BaseCommandHandler()
         {
-            
+
         }
 
         protected bool ValidarComando(T message)

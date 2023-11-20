@@ -1,7 +1,7 @@
 ﻿using NewNerdStore.Catalogos.Domain.DomainServices.Interfaces;
 using NewNerdStore.Catalogos.Domain.Events;
 using NewNerdStore.Catalogos.Domain.Interfaces.Repositories;
-using NewNerdStore.Core.Bus;
+using NewNerdStore.Core.Comunications.Mediator;
 
 namespace NewNerdStore.Catalogos.Domain.DomainServices
 {

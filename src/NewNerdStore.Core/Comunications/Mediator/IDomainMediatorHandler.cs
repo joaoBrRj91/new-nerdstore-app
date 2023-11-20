@@ -1,6 +1,6 @@
-﻿using NewNerdStore.Core.Events.Bases;
+﻿using NewNerdStore.Core.Messages.Abstracts;
 
-namespace NewNerdStore.Core.Bus
+namespace NewNerdStore.Core.Comunications.Mediator
 {
     public interface IDomainMediatorHandler
     {

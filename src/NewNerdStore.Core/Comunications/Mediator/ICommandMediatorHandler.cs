@@ -1,7 +1,6 @@
-﻿
-using NewNerdStore.Core.Events.Types;
+﻿using NewNerdStore.Core.Messages.Abstracts;
 
-namespace NewNerdStore.Core.Bus
+namespace NewNerdStore.Core.Comunications.Mediator
 {
     public interface ICommandMediatorHandler
     {
