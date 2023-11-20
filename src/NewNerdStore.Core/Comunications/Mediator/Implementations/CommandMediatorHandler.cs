@@ -1,7 +1,8 @@
 ﻿using MediatR;
+using NewNerdStore.Core.Comunications.Mediator.Interfaces;
 using NewNerdStore.Core.Messages.Abstracts;
 
-namespace NewNerdStore.Core.Comunications.Mediator
+namespace NewNerdStore.Core.Comunications.Mediator.Implementations
 {
     public class CommandMediatorHandler : ICommandMediatorHandler
     {

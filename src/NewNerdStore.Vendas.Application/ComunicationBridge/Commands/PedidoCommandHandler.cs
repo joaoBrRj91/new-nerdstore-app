@@ -1,15 +1,20 @@
 ﻿using MediatR;
+using NewNerdStore.Core.Comunications.Mediator.Interfaces;
 using NewNerdStore.Vendas.Domain.Entities;
 using NewNerdStore.Vendas.Domain.Factories;
 using NewNerdStore.Vendas.Domain.Interfaces.Repositories;
 
 namespace NewNerdStore.Vendas.Application.Comunication.Commands
 {
-    public class PedidoCommandHandler : BaseCommandHandler<AdicionarItemPedidoCommand>, IRequestHandler<AdicionarItemPedidoCommand, bool>
+    public class PedidoCommandHandler : BaseCommandHandler<AdicionarItemPedidoCommand>,
+        IRequestHandler<AdicionarItemPedidoCommand, bool>
     {
+
         private readonly IPedidoRepository _pedidoRepository;
 
-        public PedidoCommandHandler(IPedidoRepository pedidoRepository)
+        public PedidoCommandHandler(
+            IPedidoRepository pedidoRepository,
+            INotificationMediatorHandler notificationMediatorHandler) : base(notificationMediatorHandler)
         {
             _pedidoRepository = pedidoRepository;
         }

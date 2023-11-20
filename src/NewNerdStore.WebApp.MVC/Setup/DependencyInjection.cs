@@ -12,9 +12,11 @@ using NewNerdStore.Catalogos.Domain.Events.Handlers;
 using NewNerdStore.Vendas.Domain.Interfaces.Repositories;
 using NerdStore.Vendas.Infra.Repository;
 using NerdStore.Vendas.Infra;
-using NewNerdStore.Core.Comunications.Mediator;
 using NewNerdStore.Vendas.Application.Comunication.Commands;
 using NewNerdStore.Core.Messages.Commons.Notifications;
+using NewNerdStore.Core.Comunications.Mediator.Interfaces;
+using NewNerdStore.Core.Comunications.Mediator.Implementations;
+using NewNerdStore.Core.Messages.Commons.Notifications.Errors;
 
 namespace NewNerdStore.WebApp.MVC.Setup
 {
@@ -25,9 +27,10 @@ namespace NewNerdStore.WebApp.MVC.Setup
             #region Bus/Mediator
             services.AddScoped<IDomainMediatorHandler, DomainMediatorHandler>();
             services.AddScoped<ICommandMediatorHandler, CommandMediatorHandler>();
+            services.AddScoped<INotificationMediatorHandler, NotificationMediatorHandler>();
 
             #region Notifications
-            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
+            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationErrorsHandler>();
             #endregion
 
             #endregion

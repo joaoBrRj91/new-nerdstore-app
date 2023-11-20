@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using NewNerdStore.Catalogos.Application.AppServices.Interfaces;
-using NewNerdStore.Core.Comunications.Mediator;
+using NewNerdStore.Catalogos.Application.Mappers.AutoMapper;
+using NewNerdStore.Core.Comunications.Mediator.Interfaces;
+using NewNerdStore.Core.Messages.Commons.Notifications;
 using NewNerdStore.Vendas.Application.Comunication.Commands;
 
 namespace NewNerdStore.WebApp.MVC.Controllers
@@ -12,7 +15,9 @@ namespace NewNerdStore.WebApp.MVC.Controllers
 
         public CarrinhoController(
             IProdutoAppService produtoAppService,
-            ICommandMediatorHandler commandMediatorHandler) : base()
+            ICommandMediatorHandler commandMediatorHandler,
+            INotificationHandler<DomainNotification> notificationHandler,
+            INotificationMediatorHandler notificationMediator) : base(notificationHandler, notificationMediator)
         {
             _produtoAppService = produtoAppService;
             _commandMediatorHandler = commandMediatorHandler;
@@ -31,6 +36,8 @@ namespace NewNerdStore.WebApp.MVC.Controllers
             var produto = await _produtoAppService.ObterPorId(produtoId);
             if (produto is null) return NotFound();
 
+
+            //TODO : Refatorar para que o produtoAppService verifique a quantidade de estoque do produto
             if (produto.QuantidadeEstoque < quantidade)
             {
                 TempData["Erro"] = "Produto com estoque insuficiente";
@@ -38,13 +45,15 @@ namespace NewNerdStore.WebApp.MVC.Controllers
             }
 
             var command = new AdicionarItemPedidoCommand(TokenClienteId, produtoId, produto.Nome, quantidade, produto.Valor);
+            var isCommandChangeStatusEntity =  await _commandMediatorHandler.Send(command);
 
-            //if (OperacaoValida())
-            //{
-            //    return RedirectToAction("Index");
-            //}
 
-            return RedirectToAction("Index");
+            if (OperacaoValida())
+                return RedirectToAction("Index");
+
+
+            TempData["Erros"] = ObterMensagensErro();
+            return RedirectToAction("ProdutoDetalhe", "Vitrine", new {produtoId});
 
         }
     }

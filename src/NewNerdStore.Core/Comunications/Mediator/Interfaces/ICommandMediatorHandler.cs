@@ -1,6 +1,6 @@
 ﻿using NewNerdStore.Core.Messages.Abstracts;
 
-namespace NewNerdStore.Core.Comunications.Mediator
+namespace NewNerdStore.Core.Comunications.Mediator.Interfaces
 {
     public interface ICommandMediatorHandler
     {
