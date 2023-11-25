@@ -13,10 +13,10 @@ using NewNerdStore.Vendas.Domain.Interfaces.Repositories;
 using NerdStore.Vendas.Infra.Repository;
 using NerdStore.Vendas.Infra;
 using NewNerdStore.Vendas.Application.Comunication.Commands;
-using NewNerdStore.Core.Messages.Commons.Notifications;
 using NewNerdStore.Core.Comunications.Mediator.Interfaces;
 using NewNerdStore.Core.Comunications.Mediator.Implementations;
 using NewNerdStore.Core.Messages.Commons.Notifications.Errors;
+using NewNerdStore.Core.Messages.Commons.Notifications.Events;
 
 namespace NewNerdStore.WebApp.MVC.Setup
 {
@@ -24,13 +24,18 @@ namespace NewNerdStore.WebApp.MVC.Setup
     {
         public static void RegisterServices(this IServiceCollection services, string connectionString)
         {
-            #region Bus/Mediator
-            services.AddScoped<IDomainMediatorHandler, DomainMediatorHandler>();
-            services.AddScoped<ICommandMediatorHandler, CommandMediatorHandler>();
-            services.AddScoped<INotificationMediatorHandler, NotificationMediatorHandler>();
+            #region Shared Kernel (Core)
+
+            #region Mediator Strategies
+            services.AddScoped<IDomainEventMediatorStrategy, DomainEventMediatorStrategy>();
+            services.AddScoped<ICommandMediatorStrategy, CommandMediatorStrategy>();
+            services.AddScoped<INotificationMediatorStrategy, NotificationMediatorStrategy>();
+            services.AddScoped<INotificationEventManager, NotificationEventManager>();
 
             #region Notifications
-            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationErrorsHandler>();
+            services.AddScoped<INotificationHandler<DomainErrorNotifications>, DomainNotificationErrorsHandler>();
+            #endregion
+
             #endregion
 
             #endregion
@@ -38,7 +43,7 @@ namespace NewNerdStore.WebApp.MVC.Setup
             #region Bounded Context Catalogos
 
             #region Domain Events Handlers (Mediator)
-            services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, ProdutoAbaixoEstoqueEventHandler>();
+            services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueDomainEvent>, ProdutoAbaixoEstoqueDomainEventHandler>();
             #endregion
            
             services.AddScoped<IProdutoRepository, ProdutoRepository>();

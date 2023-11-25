@@ -4,18 +4,18 @@ using NewNerdStore.Core.Messages.Abstracts;
 
 namespace NewNerdStore.Core.Comunications.Mediator.Implementations
 {
-    public class CommandMediatorHandler : ICommandMediatorHandler
+    public class DomainEventMediatorStrategy : IDomainEventMediatorStrategy
     {
         private readonly IMediator _mediator;
 
-        public CommandMediatorHandler(IMediator mediator)
+        public DomainEventMediatorStrategy(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        public async Task<bool> Send<T>(T command) where T : Command
+        public async Task PublishEvent<T>(T @event) where T : Event
         {
-            return await _mediator.Send(command);
+            await _mediator.Publish(@event);
         }
     }
 }

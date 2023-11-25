@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ComunicationBridge\Events\" />
     <Folder Include="ComunicationBridge\Queries\" />
   </ItemGroup>
 

@@ -2,11 +2,11 @@
 
 namespace NewNerdStore.Catalogos.Domain.Events
 {
-    public class ProdutoAbaixoEstoqueEvent : DomainEvent
+    public class ProdutoAbaixoEstoqueDomainEvent : DomainEvent
     {
         public int QuantidadeRestante { get; private set; }
 
-        public ProdutoAbaixoEstoqueEvent(Guid aggregateId, int quantidadeRestante) : base(aggregateId)
+        public ProdutoAbaixoEstoqueDomainEvent(Guid aggregateId, int quantidadeRestante) : base(aggregateId)
         {
             QuantidadeRestante = quantidadeRestante;
         }

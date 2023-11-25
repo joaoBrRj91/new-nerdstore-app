@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NewNerdStore.Catalogos.Application.AppServices.Interfaces;
 using NewNerdStore.Catalogos.Application.Mappers.AutoMapper;
 using NewNerdStore.Core.Comunications.Mediator.Interfaces;
-using NewNerdStore.Core.Messages.Commons.Notifications;
+using NewNerdStore.Core.Messages.Commons.Notifications.Errors;
 using NewNerdStore.Vendas.Application.Comunication.Commands;
 
 namespace NewNerdStore.WebApp.MVC.Controllers
@@ -11,13 +11,13 @@ namespace NewNerdStore.WebApp.MVC.Controllers
     public class CarrinhoController : BaseController
     {
         private readonly IProdutoAppService _produtoAppService;
-        private readonly ICommandMediatorHandler _commandMediatorHandler;
+        private readonly ICommandMediatorStrategy _commandMediatorHandler;
 
         public CarrinhoController(
             IProdutoAppService produtoAppService,
-            ICommandMediatorHandler commandMediatorHandler,
-            INotificationHandler<DomainNotification> notificationHandler,
-            INotificationMediatorHandler notificationMediator) : base(notificationHandler, notificationMediator)
+            ICommandMediatorStrategy commandMediatorHandler,
+            INotificationHandler<DomainErrorNotifications> notificationHandler
+            /*INotificationMediatorHandler notificationMediator*/) : base(notificationHandler/*, notificationMediator*/)
         {
             _produtoAppService = produtoAppService;
             _commandMediatorHandler = commandMediatorHandler;

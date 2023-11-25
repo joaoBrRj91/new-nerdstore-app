@@ -9,9 +9,9 @@ namespace NewNerdStore.Catalogos.Domain.DomainServices
     public class EstoqueService : IEstoqueService
     {
         private readonly IProdutoRepository _produtoRepository;
-        private readonly IDomainMediatorHandler _bus;
+        private readonly IDomainEventMediatorStrategy _bus;
 
-        public EstoqueService(IProdutoRepository produtoRepository, IDomainMediatorHandler bus)
+        public EstoqueService(IProdutoRepository produtoRepository, IDomainEventMediatorStrategy bus)
         {
             this._produtoRepository = produtoRepository;
             this._bus = bus;
@@ -29,7 +29,7 @@ namespace NewNerdStore.Catalogos.Domain.DomainServices
 
             //TODO: Parametrizar a quantidade de estoque baixo
             if (produto.QuantidadeEstoque < 10)
-               await _bus.PublishEvent(new ProdutoAbaixoEstoqueEvent
+               await _bus.PublishEvent(new ProdutoAbaixoEstoqueDomainEvent
                    (aggregateId: produto.Id, quantidadeRestante: produto.QuantidadeEstoque));
 
             _produtoRepository.Atualizar(produto);

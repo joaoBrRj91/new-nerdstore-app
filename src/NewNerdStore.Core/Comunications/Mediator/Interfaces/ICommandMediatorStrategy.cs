@@ -2,7 +2,7 @@
 
 namespace NewNerdStore.Core.Comunications.Mediator.Interfaces
 {
-    public interface ICommandMediatorHandler
+    public interface ICommandMediatorStrategy
     {
         Task<bool> Send<T>(T command) where T : Command;
     }

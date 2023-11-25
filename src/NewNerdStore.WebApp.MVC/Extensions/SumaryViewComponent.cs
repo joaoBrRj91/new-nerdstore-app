@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using NewNerdStore.Core.Messages.Commons.Notifications;
 using NewNerdStore.Core.Messages.Commons.Notifications.Errors;
 
 namespace NewNerdStore.WebApp.MVC.Extensions
@@ -9,7 +8,7 @@ namespace NewNerdStore.WebApp.MVC.Extensions
     {
         private readonly IDomainNotificationErrosHandler _notifications;
 
-        public SummaryViewComponent(INotificationHandler<DomainNotification> notifications)
+        public SummaryViewComponent(INotificationHandler<DomainErrorNotifications> notifications)
         {
             _notifications = (IDomainNotificationErrosHandler)notifications;
         }

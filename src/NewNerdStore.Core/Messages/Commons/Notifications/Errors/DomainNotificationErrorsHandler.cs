@@ -2,22 +2,22 @@
 
 namespace NewNerdStore.Core.Messages.Commons.Notifications.Errors
 {
-    public class DomainNotificationErrorsHandler : IDomainNotificationErrosHandler, INotificationHandler<DomainNotification>
+    public class DomainNotificationErrorsHandler : IDomainNotificationErrosHandler, INotificationHandler<DomainErrorNotifications>
     {
-        private List<DomainNotification> _notificationsErrors;
+        private List<DomainErrorNotifications> _notificationsErrors;
 
         public DomainNotificationErrorsHandler()
         {
-            _notificationsErrors = new List<DomainNotification>();
+            _notificationsErrors = new List<DomainErrorNotifications>();
         }
 
-        public Task Handle(DomainNotification message, CancellationToken cancellationToken)
+        public Task Handle(DomainErrorNotifications message, CancellationToken cancellationToken)
         {
             _notificationsErrors.Add(message);
             return Task.CompletedTask;
         }
 
-        public List<DomainNotification> ObterNotificacoes() => _notificationsErrors;
+        public List<DomainErrorNotifications> ObterNotificacoes() => _notificationsErrors;
 
         public bool TemNotificacao() => ObterNotificacoes().Any();
 

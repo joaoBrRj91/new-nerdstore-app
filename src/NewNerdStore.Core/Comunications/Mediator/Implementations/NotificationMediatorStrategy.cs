@@ -1,19 +1,19 @@
 ﻿using MediatR;
 using NewNerdStore.Core.Comunications.Mediator.Interfaces;
-using NewNerdStore.Core.Messages.Commons.Notifications;
+using NewNerdStore.Core.Messages.Commons.Notifications.Errors;
 
 namespace NewNerdStore.Core.Comunications.Mediator.Implementations
 {
-    public class NotificationMediatorHandler : INotificationMediatorHandler
+    public class NotificationMediatorStrategy : INotificationMediatorStrategy
     {
         private readonly IMediator _mediator;
 
-        public NotificationMediatorHandler(IMediator mediator)
+        public NotificationMediatorStrategy(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        public async Task PublishNotification<T>(T notification) where T : DomainNotification
+        public async Task PublishNotification<T>(T notification) where T : DomainErrorNotifications
         {
             await _mediator.Publish(notification);
         }

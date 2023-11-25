@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using NewNerdStore.Core.Messages.Abstracts;
 
-namespace NewNerdStore.Core.Messages.Commons.Notifications
+namespace NewNerdStore.Core.Messages.Commons.Notifications.Errors
 {
-    public class DomainNotification : Message, INotification
+    public class DomainErrorNotifications : Message, INotification
     {
         public DateTime Timestamp { get; private set; }
         public Guid DomainNotificationId { get; private set; }
@@ -11,7 +11,7 @@ namespace NewNerdStore.Core.Messages.Commons.Notifications
         public string Value { get; private set; }
         public int Version { get; private set; }
 
-        public DomainNotification(string key, string value)
+        public DomainErrorNotifications(string key, string value)
         {
             Timestamp = DateTime.Now;
             DomainNotificationId = Guid.NewGuid();

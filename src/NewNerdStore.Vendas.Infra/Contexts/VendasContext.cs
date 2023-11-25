@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NewNerdStore.Core.Comunications.Mediator.Interfaces;
 using NewNerdStore.Core.Data;
 using NewNerdStore.Core.Messages.Abstracts;
 using NewNerdStore.Vendas.Domain.Entities;
@@ -10,9 +11,12 @@ namespace NerdStore.Vendas.Infra
 {
     public class VendasContext : DbContext, IUnitOfWork
     {
-        public VendasContext(DbContextOptions<VendasContext> options)
+        //private readonly IDomainMediatorHandler _domainMediatorHandler;
+
+        public VendasContext(DbContextOptions<VendasContext> options/*, IDomainMediatorHandler domainMediatorHandler*/)
             : base(options)
         {
+            //_domainMediatorHandler = domainMediatorHandler;
         }
 
         public DbSet<Pedido> Pedidos { get; set; }
@@ -36,6 +40,7 @@ namespace NerdStore.Vendas.Infra
             }
             
             var sucesso = await base.SaveChangesAsync() > 0;
+            //if (sucesso) _domainMediatorHandler.PublishEvents(this);
 
             return sucesso;
         }
@@ -47,7 +52,7 @@ namespace NerdStore.Vendas.Infra
                 .Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
 
-            modelBuilder.Ignore<Event>();
+            //modelBuilder.Ignore<Event>();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(VendasContext).Assembly);
 

@@ -1,5 +1,8 @@
 ﻿using MediatR;
 using NewNerdStore.Core.Comunications.Mediator.Interfaces;
+using NewNerdStore.Core.Messages.Abstracts;
+using NewNerdStore.Core.Messages.Commons.Notifications.Events;
+using NewNerdStore.Vendas.Application.ComunicationBridge.Events.Domain;
 using NewNerdStore.Vendas.Domain.Entities;
 using NewNerdStore.Vendas.Domain.Factories;
 using NewNerdStore.Vendas.Domain.Interfaces.Repositories;
@@ -7,21 +10,25 @@ using NewNerdStore.Vendas.Domain.Interfaces.Repositories;
 namespace NewNerdStore.Vendas.Application.Comunication.Commands
 {
     public class PedidoCommandHandler : BaseCommandHandler<AdicionarItemPedidoCommand>,
-        IRequestHandler<AdicionarItemPedidoCommand, bool>
+        IRequestHandler<AdicionarItemPedidoCommand, bool>, IDisposable
     {
 
         private readonly IPedidoRepository _pedidoRepository;
+        private readonly INotificationEventManager _notificationEventManager;
 
         public PedidoCommandHandler(
             IPedidoRepository pedidoRepository,
-            INotificationMediatorHandler notificationMediatorHandler) : base(notificationMediatorHandler)
+            INotificationMediatorStrategy notificationMediatorHandler,
+            INotificationEventManager notificationEventManager) 
+            : base(notificationMediatorHandler)
         {
             _pedidoRepository = pedidoRepository;
+            this._notificationEventManager = notificationEventManager;
         }
 
         public async Task<bool> Handle(AdicionarItemPedidoCommand message, CancellationToken cancellationToken)
         {
-            if (!ValidarComando(message)) return false;
+            if (!CommandIsValid(message)) return false;
 
             var pedido = await _pedidoRepository.ObterPedidoRascunhoPorClienteId(message.ClienteId);
             var pedidoItem = new PedidoItem(message.ProdutoId, message.ProdutoNome, message.Quantidade, message.ValorUnitario);
@@ -31,16 +38,26 @@ namespace NewNerdStore.Vendas.Application.Comunication.Commands
             else
                 GerenciarItemPedido(pedido, pedidoItem);
 
-            return await _pedidoRepository.UnitOfWork.Commit();
+            var isCommandChangeStatusEntity = await _pedidoRepository.UnitOfWork.Commit();
+
+            if (isCommandChangeStatusEntity)
+                await _notificationEventManager.SendAllNotificationEvents();
+
+            return isCommandChangeStatusEntity;
 
         }
 
         private void CriarNovoPedidoRascunho(PedidoItem pedidoItem, Guid clienteId)
         {
             var pedido = PedidoFactory.NovoPedidoRascunho(clienteId);
+
             pedido.AdicionarItem(pedidoItem);
 
             _pedidoRepository.Adicionar(pedido);
+
+            _notificationEventManager
+                .AddNotificationEvent(new PedidoRascunhoIniciadoDomainEvent(clienteId, pedidoItem.ProdutoId));
+
         }
 
         private void GerenciarItemPedido(Pedido pedido, PedidoItem pedidoItem)
@@ -53,7 +70,13 @@ namespace NewNerdStore.Vendas.Application.Comunication.Commands
             else
                 _pedidoRepository.AdicionarItem(pedidoItem);
 
+
+            _notificationEventManager
+                .AddNotificationEvent(new PedidoRascunhoAtualizadoDomainEvent(pedido.ClienteId, pedido.Id,pedido.ValorTotal));
         }
+
+
+        public void Dispose() => _pedidoRepository.Dispose();
 
     }
 }

@@ -2,7 +2,7 @@
 {
     public interface IDomainNotificationErrosHandler: IDisposable
     {
-        List<DomainNotification> ObterNotificacoes();
+        List<DomainErrorNotifications> ObterNotificacoes();
         bool TemNotificacao();
     }
 }
