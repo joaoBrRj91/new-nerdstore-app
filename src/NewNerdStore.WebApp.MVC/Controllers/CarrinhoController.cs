@@ -11,16 +11,16 @@ namespace NewNerdStore.WebApp.MVC.Controllers
     public class CarrinhoController : BaseController
     {
         private readonly IProdutoAppService _produtoAppService;
-        private readonly ICommandMediatorStrategy _commandMediatorHandler;
+        private readonly ICommandMediatorStrategy _commandMediatorStrategy;
 
         public CarrinhoController(
             IProdutoAppService produtoAppService,
-            ICommandMediatorStrategy commandMediatorHandler,
+            ICommandMediatorStrategy commandMediatorStrategy,
             INotificationHandler<DomainErrorNotifications> notificationHandler
             /*INotificationMediatorHandler notificationMediator*/) : base(notificationHandler/*, notificationMediator*/)
         {
             _produtoAppService = produtoAppService;
-            _commandMediatorHandler = commandMediatorHandler;
+            _commandMediatorStrategy = commandMediatorStrategy;
         }
 
         public IActionResult Index()
@@ -45,7 +45,7 @@ namespace NewNerdStore.WebApp.MVC.Controllers
             }
 
             var command = new AdicionarItemPedidoCommand(TokenClienteId, produtoId, produto.Nome, quantidade, produto.Valor);
-            var isCommandChangeStatusEntity =  await _commandMediatorHandler.Send(command);
+            var isCommandChangeStatusEntity =  await _commandMediatorStrategy.Send(command);
 
 
             if (OperacaoValida())

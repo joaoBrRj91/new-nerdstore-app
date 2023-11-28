@@ -9,12 +9,12 @@ namespace NewNerdStore.Core.Messages.Commons.Notifications.Events
 
         public IReadOnlyCollection<Event> NotificationEvents => _notificationEvents?.AsReadOnly();
 
-        private readonly IDomainEventMediatorStrategy _domainEventMediatorHandler;
+        private readonly IDomainEventMediatorStrategy _domainEventMediatorStrategy;
 
-        public NotificationEventManager(IDomainEventMediatorStrategy domainEventMediatorHandler)
+        public NotificationEventManager(IDomainEventMediatorStrategy domainEventMediatorStrategy)
         {
             _notificationEvents = new List<Event>();
-            _domainEventMediatorHandler = domainEventMediatorHandler;
+            _domainEventMediatorStrategy = domainEventMediatorStrategy;
         }
 
         public void AddNotificationEvent<T>(T @event) where T : Event 
@@ -41,7 +41,7 @@ namespace NewNerdStore.Core.Messages.Commons.Notifications.Events
             var notificationEventsTasks = NotificationEvents
                 .Select(async (@event) =>
             {
-                await _domainEventMediatorHandler.PublishEvent(@event);
+                await _domainEventMediatorStrategy.PublishEvent(@event);
             });
 
             await Task.WhenAll(notificationEventsTasks);

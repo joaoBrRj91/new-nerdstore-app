@@ -8,11 +8,11 @@ namespace NewNerdStore.Vendas.Application.Comunication.Commands
 {
     public abstract class BaseCommandHandler<T> where T : Command
     {
-        private readonly INotificationMediatorStrategy _notificationMediatorHandler;
+        private readonly INotificationMediatorStrategy _notificationMediatorStrategy;
 
-        protected BaseCommandHandler(INotificationMediatorStrategy notificationMediatorHandler)
+        protected BaseCommandHandler(INotificationMediatorStrategy notificationMediatorStrategy)
         {
-            _notificationMediatorHandler = notificationMediatorHandler;
+            _notificationMediatorStrategy = notificationMediatorStrategy;
         }
 
         protected bool CommandIsValid(T message)
@@ -24,7 +24,7 @@ namespace NewNerdStore.Vendas.Application.Comunication.Commands
                 .ForEach(error =>
                 {
                     //Lançar um evento de erro - Domain Notification
-                    _notificationMediatorHandler
+                    _notificationMediatorStrategy
                     .PublishNotification(new DomainErrorNotifications(key: message.MessageType, value: error.ErrorMessage));
                 });
 

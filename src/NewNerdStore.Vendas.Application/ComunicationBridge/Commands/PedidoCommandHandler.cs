@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using NewNerdStore.Core.Comunications.Mediator.Interfaces;
-using NewNerdStore.Core.Messages.Abstracts;
 using NewNerdStore.Core.Messages.Commons.Notifications.Events;
 using NewNerdStore.Vendas.Application.ComunicationBridge.Events.Domain;
 using NewNerdStore.Vendas.Domain.Entities;
@@ -18,9 +17,9 @@ namespace NewNerdStore.Vendas.Application.Comunication.Commands
 
         public PedidoCommandHandler(
             IPedidoRepository pedidoRepository,
-            INotificationMediatorStrategy notificationMediatorHandler,
+            INotificationMediatorStrategy notificationMediatorStrategy,
             INotificationEventManager notificationEventManager) 
-            : base(notificationMediatorHandler)
+            : base(notificationMediatorStrategy)
         {
             _pedidoRepository = pedidoRepository;
             this._notificationEventManager = notificationEventManager;
