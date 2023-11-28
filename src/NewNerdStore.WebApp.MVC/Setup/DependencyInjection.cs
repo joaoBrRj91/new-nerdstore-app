@@ -17,6 +17,9 @@ using NewNerdStore.Core.Comunications.Mediator.Interfaces;
 using NewNerdStore.Core.Comunications.Mediator.Implementations;
 using NewNerdStore.Core.Messages.Commons.Notifications.Errors;
 using NewNerdStore.Core.Messages.Commons.Notifications.Events;
+using NewNerdStore.Vendas.Application.ComunicationBridge.Queries.Pedido;
+using NewNerdStore.Vendas.Application.ComunicationBridge.Events.Domain;
+using NerdStore.Vendas.Application.Events.Handler;
 
 namespace NewNerdStore.WebApp.MVC.Setup
 {
@@ -59,7 +62,15 @@ namespace NewNerdStore.WebApp.MVC.Setup
             services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
             #endregion
 
+            #region Domain Events Handlers (Mediator)
+            services.AddScoped<INotificationHandler<PedidoRascunhoIniciadoDomainEvent>, PedidoEventHandler>();
+            services.AddScoped<INotificationHandler<PedidoRascunhoAtualizadoDomainEvent>, PedidoEventHandler>();
+            services.AddScoped<INotificationHandler<PedidoItemAdicionadoDomainEvent>, PedidoEventHandler>();
+
+            #endregion
+
             services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<IPedidoQuery, PedidoQuery>();
             services.AddDbContext<VendasContext>(options =>
              options.UseSqlServer(connectionString));
             #endregion

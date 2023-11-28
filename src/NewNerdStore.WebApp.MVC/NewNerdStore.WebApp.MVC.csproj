@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="Views\AdminProdutos\" />
+    <Folder Include="Views\Carrinho\" />
   </ItemGroup>
 
 </Project>

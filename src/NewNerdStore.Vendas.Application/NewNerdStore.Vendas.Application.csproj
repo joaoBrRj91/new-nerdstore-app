@@ -3,16 +3,16 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="ComunicationBridge\Queries\" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NewNerdStore.Vendas.Domain\NewNerdStore.Vendas.Domain.csproj" />
     <ProjectReference Include="..\NewNerdStore.Vendas.Infra\NewNerdStore.Vendas.Infra.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ComunicationBridge\Events\Handler\" />
   </ItemGroup>
 
 </Project>

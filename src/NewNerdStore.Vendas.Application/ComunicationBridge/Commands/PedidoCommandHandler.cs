@@ -61,13 +61,17 @@ namespace NewNerdStore.Vendas.Application.Comunication.Commands
 
         private void GerenciarItemPedido(Pedido pedido, PedidoItem pedidoItem)
         {
-            pedido.AdicionarItem(pedidoItem);
             var pedidoItemExistente = pedido.PedidoItemExistente(pedidoItem);
+            pedido.AdicionarItem(pedidoItem);
 
             if (pedidoItemExistente)
                 _pedidoRepository.AtualizarItem(pedido.PedidoItems.FirstOrDefault(p => p.ProdutoId == pedidoItem.ProdutoId));
             else
+            {
                 _pedidoRepository.AdicionarItem(pedidoItem);
+                _notificationEventManager
+                .AddNotificationEvent(new PedidoRascunhoIniciadoDomainEvent(pedido.ClienteId, pedido.Id));
+            }
 
 
             _notificationEventManager

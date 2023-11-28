@@ -5,27 +5,33 @@ using NewNerdStore.Catalogos.Application.Mappers.AutoMapper;
 using NewNerdStore.Core.Comunications.Mediator.Interfaces;
 using NewNerdStore.Core.Messages.Commons.Notifications.Errors;
 using NewNerdStore.Vendas.Application.Comunication.Commands;
+using NewNerdStore.Vendas.Application.ComunicationBridge.Queries.Pedido;
 
 namespace NewNerdStore.WebApp.MVC.Controllers
 {
     public class CarrinhoController : BaseController
     {
         private readonly IProdutoAppService _produtoAppService;
+        private readonly IPedidoQuery _pedidoQuery;
         private readonly ICommandMediatorStrategy _commandMediatorStrategy;
 
         public CarrinhoController(
             IProdutoAppService produtoAppService,
             ICommandMediatorStrategy commandMediatorStrategy,
+            IPedidoQuery  pedidoQuery,  
             INotificationHandler<DomainErrorNotifications> notificationHandler
             /*INotificationMediatorHandler notificationMediator*/) : base(notificationHandler/*, notificationMediator*/)
         {
             _produtoAppService = produtoAppService;
             _commandMediatorStrategy = commandMediatorStrategy;
+            _pedidoQuery = pedidoQuery;
         }
 
-        public IActionResult Index()
+
+        [Route("meu-carrinho")]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _pedidoQuery.ObterCarrinhoCliente(TokenClienteId));
         }
 
 
