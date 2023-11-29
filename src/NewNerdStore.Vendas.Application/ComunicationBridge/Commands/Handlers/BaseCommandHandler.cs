@@ -15,6 +15,11 @@ namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
             _notificationMediatorStrategy = notificationMediatorStrategy;
         }
 
+
+        protected void PublishDomainErrorNotification(DomainErrorNotifications domainErrorNotification)
+            => _notificationMediatorStrategy.PublishNotification(domainErrorNotification);
+
+
         protected bool CommandIsValid(T message)
         {
             if (message.EhValido()) return true;
@@ -24,8 +29,8 @@ namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
                 .ForEach(error =>
                 {
                     //Lançar um evento de erro - Domain Notification
-                    _notificationMediatorStrategy
-                    .PublishNotification(new DomainErrorNotifications(key: message.MessageType, value: error.ErrorMessage));
+                    PublishDomainErrorNotification
+                    (new DomainErrorNotifications(key: message.MessageType, value: error.ErrorMessage));
                 });
 
 

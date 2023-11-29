@@ -68,13 +68,8 @@ namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
             if (pedidoItemExistente)
                 _pedidoRepository.AtualizarItem(pedido.PedidoItems.FirstOrDefault(p => p.ProdutoId == pedidoItem.ProdutoId));
             else
-            {
                 _pedidoRepository.AdicionarItem(pedidoItem);
-                _notificationEventManager
-                .AddNotificationEvent(new PedidoRascunhoIniciadoDomainEvent(pedido.ClienteId, pedido.Id));
-            }
-
-
+               
             _notificationEventManager
                 .AddNotificationEvent(new PedidoRascunhoAtualizadoDomainEvent(pedido.ClienteId, pedido.Id, pedido.ValorTotal));
         }

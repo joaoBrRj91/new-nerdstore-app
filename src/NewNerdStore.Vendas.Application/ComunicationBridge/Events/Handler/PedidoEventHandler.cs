@@ -3,6 +3,8 @@ using NewNerdStore.Vendas.Application.ComunicationBridge.Events.Domain;
 
 namespace NerdStore.Vendas.Application.Events.Handler
 {
+
+    //TODO : REFACTORING : Criar handlers especificos para cada DomainEvent
     public class PedidoEventHandler :
         INotificationHandler<PedidoRascunhoIniciadoDomainEvent>,
         INotificationHandler<PedidoRascunhoAtualizadoDomainEvent>,
