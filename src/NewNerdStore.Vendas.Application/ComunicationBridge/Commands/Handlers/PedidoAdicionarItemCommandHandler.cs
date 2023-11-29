@@ -9,14 +9,14 @@ using NewNerdStore.Vendas.Domain.Interfaces.Repositories;
 
 namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
 {
-    public class PedidoCommandHandler : BaseCommandHandler<AdicionarItemPedidoCommand>,
+    public class PedidoAdicionarItemCommandHandler : BaseCommandHandler<AdicionarItemPedidoCommand>,
         IRequestHandler<AdicionarItemPedidoCommand, bool>, IDisposable
     {
 
         private readonly IPedidoRepository _pedidoRepository;
         private readonly INotificationEventManager _notificationEventManager;
 
-        public PedidoCommandHandler(
+        public PedidoAdicionarItemCommandHandler(
             IPedidoRepository pedidoRepository,
             INotificationMediatorStrategy notificationMediatorStrategy,
             INotificationEventManager notificationEventManager)

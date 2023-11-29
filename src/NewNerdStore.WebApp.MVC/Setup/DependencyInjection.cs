@@ -21,9 +21,12 @@ using NewNerdStore.Vendas.Application.ComunicationBridge.Queries.Pedido;
 using NewNerdStore.Vendas.Application.ComunicationBridge.Events.Domain;
 using NerdStore.Vendas.Application.Events.Handler;
 using NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers;
+using NewNerdStore.Vendas.Application.ComunicationBridge.Commands;
 
 namespace NewNerdStore.WebApp.MVC.Setup
 {
+
+    //TODO : REFACTORING : Extension Methods para as configs de dependencia do shared kernel e dos demais bounded contexts
     public static class DependencyInjection
     {
         public static void RegisterServices(this IServiceCollection services, string connectionString)
@@ -60,7 +63,10 @@ namespace NewNerdStore.WebApp.MVC.Setup
             #region Bounded Context Vendas
 
             #region Commands/Queries Handlers (Mediator)
-            services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
+            services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoAdicionarItemCommandHandler>();
+            services.AddScoped<IRequestHandler<AtualizarItemPedidoCommand, bool>, PedidoAtualizarItemCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoverItemPedidoCommand, bool>, PedidoRemoverItemCommandHandler>();
+            services.AddScoped<IRequestHandler<AplicarVoucherPedidoCommand, bool>, PedidoAplicarVoucherCommandHandler>();
             #endregion
 
             #region Domain Events Handlers (Mediator)
