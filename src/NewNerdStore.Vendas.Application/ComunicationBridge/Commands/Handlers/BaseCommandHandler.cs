@@ -4,7 +4,7 @@ using NewNerdStore.Core.Messages.Commons.Notifications;
 using NewNerdStore.Core.Messages.Commons.Notifications.Errors;
 using NewNerdStore.Core.Messages.Commons.Notifications.Events;
 
-namespace NewNerdStore.Vendas.Application.Comunication.Commands
+namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
 {
     public abstract class BaseCommandHandler<T> where T : Command
     {
@@ -30,7 +30,7 @@ namespace NewNerdStore.Vendas.Application.Comunication.Commands
 
 
             return false;
-        }        
+        }
 
     }
 }

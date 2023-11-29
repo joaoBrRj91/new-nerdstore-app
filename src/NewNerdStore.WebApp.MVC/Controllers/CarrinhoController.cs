@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NewNerdStore.Catalogos.Application.AppServices.Interfaces;
-using NewNerdStore.Catalogos.Application.Mappers.AutoMapper;
 using NewNerdStore.Core.Comunications.Mediator.Interfaces;
 using NewNerdStore.Core.Messages.Commons.Notifications.Errors;
 using NewNerdStore.Vendas.Application.Comunication.Commands;

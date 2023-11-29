@@ -1,12 +1,13 @@
 ﻿using MediatR;
 using NewNerdStore.Core.Comunications.Mediator.Interfaces;
 using NewNerdStore.Core.Messages.Commons.Notifications.Events;
+using NewNerdStore.Vendas.Application.Comunication.Commands;
 using NewNerdStore.Vendas.Application.ComunicationBridge.Events.Domain;
 using NewNerdStore.Vendas.Domain.Entities;
 using NewNerdStore.Vendas.Domain.Factories;
 using NewNerdStore.Vendas.Domain.Interfaces.Repositories;
 
-namespace NewNerdStore.Vendas.Application.Comunication.Commands
+namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
 {
     public class PedidoCommandHandler : BaseCommandHandler<AdicionarItemPedidoCommand>,
         IRequestHandler<AdicionarItemPedidoCommand, bool>, IDisposable
@@ -18,11 +19,11 @@ namespace NewNerdStore.Vendas.Application.Comunication.Commands
         public PedidoCommandHandler(
             IPedidoRepository pedidoRepository,
             INotificationMediatorStrategy notificationMediatorStrategy,
-            INotificationEventManager notificationEventManager) 
+            INotificationEventManager notificationEventManager)
             : base(notificationMediatorStrategy)
         {
             _pedidoRepository = pedidoRepository;
-            this._notificationEventManager = notificationEventManager;
+            _notificationEventManager = notificationEventManager;
         }
 
         public async Task<bool> Handle(AdicionarItemPedidoCommand message, CancellationToken cancellationToken)
@@ -75,7 +76,7 @@ namespace NewNerdStore.Vendas.Application.Comunication.Commands
 
 
             _notificationEventManager
-                .AddNotificationEvent(new PedidoRascunhoAtualizadoDomainEvent(pedido.ClienteId, pedido.Id,pedido.ValorTotal));
+                .AddNotificationEvent(new PedidoRascunhoAtualizadoDomainEvent(pedido.ClienteId, pedido.Id, pedido.ValorTotal));
         }
 
 

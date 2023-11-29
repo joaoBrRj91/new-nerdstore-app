@@ -20,6 +20,7 @@ using NewNerdStore.Core.Messages.Commons.Notifications.Events;
 using NewNerdStore.Vendas.Application.ComunicationBridge.Queries.Pedido;
 using NewNerdStore.Vendas.Application.ComunicationBridge.Events.Domain;
 using NerdStore.Vendas.Application.Events.Handler;
+using NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers;
 
 namespace NewNerdStore.WebApp.MVC.Setup
 {
