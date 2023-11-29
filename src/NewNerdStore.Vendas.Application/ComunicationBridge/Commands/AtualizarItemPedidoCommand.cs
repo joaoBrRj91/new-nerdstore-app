@@ -1,4 +1,5 @@
 ﻿using NewNerdStore.Core.Messages.Abstracts;
+using NewNerdStore.Vendas.Application.ComunicationBridge.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;

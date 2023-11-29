@@ -1,6 +1,6 @@
-﻿using NewNerdStore.Core.DomainObjects;
+﻿using FluentValidation.Results;
+using NewNerdStore.Core.DomainObjects;
 using NewNerdStore.Vendas.Domain.Enums;
-using System.ComponentModel.DataAnnotations;
 
 namespace NewNerdStore.Vendas.Domain.Entities
 {
@@ -37,11 +37,16 @@ namespace NewNerdStore.Vendas.Domain.Entities
 
         protected internal Pedido() => _pedidoItems = new List<PedidoItem>();
 
-        public void AplicarVoucher(Voucher voucher)
+        public ValidationResult AplicarVoucher(Voucher voucher)
         {
+            var validationResult = voucher.ValidarSeAplicavel();
+            if (!validationResult.IsValid) return validationResult;
+
             Voucher = voucher;
             VoucherUtilizado = true;
             CalcularValorPedido();
+
+            return validationResult;
         }
 
         public void CalcularValorPedido()

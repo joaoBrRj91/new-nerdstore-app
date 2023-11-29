@@ -18,6 +18,7 @@ namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
             _pedidoRepository = pedidoRepository;
         }
 
+        //TODO : REFACTORING EXTRACT METHOD PRIVATE BUSINESS RULES SEGREGATIONS
         public async Task<bool> Handle(AtualizarItemPedidoCommand message, CancellationToken cancellationToken)
         {
             if (!CommandIsValid(message)) return false;
@@ -43,7 +44,7 @@ namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
             pedido.AtualizarUnidades(pedidoItem, message.Quantidade);
 
             _pedidoRepository.AtualizarItem(pedidoItem);
-            _pedidoRepository.Atualizar(pedido);
+            //_pedidoRepository.Atualizar(pedido);
 
             return await _pedidoRepository.UnitOfWork.Commit();
         }

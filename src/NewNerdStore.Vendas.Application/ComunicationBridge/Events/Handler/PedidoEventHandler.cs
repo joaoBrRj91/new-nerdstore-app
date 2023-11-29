@@ -8,7 +8,8 @@ namespace NerdStore.Vendas.Application.Events.Handler
     public class PedidoEventHandler :
         INotificationHandler<PedidoRascunhoIniciadoDomainEvent>,
         INotificationHandler<PedidoRascunhoAtualizadoDomainEvent>,
-        INotificationHandler<PedidoItemAdicionadoDomainEvent>
+        INotificationHandler<PedidoItemAdicionadoDomainEvent>,
+        INotificationHandler<PedidoProdutoRemovidoEvent>
     {
 
         public Task Handle(PedidoRascunhoIniciadoDomainEvent notification, CancellationToken cancellationToken)
@@ -26,5 +27,9 @@ namespace NerdStore.Vendas.Application.Events.Handler
             return Task.CompletedTask;
         }
 
+        public Task Handle(PedidoProdutoRemovidoEvent notification, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
