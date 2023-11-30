@@ -67,7 +67,7 @@ namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
                 .AddNotificationEvent(new PedidoRascunhoAtualizadoDomainEvent(pedido.ClienteId, pedido.Id, pedido.ValorTotal));
 
             _notificationEventManager
-                 .AddNotificationEvent(new VoucherAplicadoPedidoEvent(message.ClienteId, pedido.Id, voucher.Id));
+                 .AddNotificationEvent(new VoucherAplicadoPedidoDomainEvent(message.ClienteId, pedido.Id, voucher.Id));
 
             _pedidoRepository.Atualizar(pedido);
 

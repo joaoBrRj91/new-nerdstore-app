@@ -2,9 +2,9 @@
 
 namespace NewNerdStore.Vendas.Application.ComunicationBridge.Events.Domain
 {
-    public class PedidoProdutoRemovidoEvent : DomainEvent
+    public class PedidoProdutoRemovidoDomainEvent : DomainEvent
     {
-        public PedidoProdutoRemovidoEvent(Guid clienteId, Guid pedidoId, Guid produtoId)
+        public PedidoProdutoRemovidoDomainEvent(Guid clienteId, Guid pedidoId, Guid produtoId)
             :base(aggregateId: pedidoId)
         {
             ClienteId = clienteId;

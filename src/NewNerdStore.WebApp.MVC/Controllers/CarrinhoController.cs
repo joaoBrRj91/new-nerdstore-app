@@ -4,6 +4,7 @@ using NewNerdStore.Catalogos.Application.AppServices.Interfaces;
 using NewNerdStore.Core.Comunications.Mediator.Interfaces;
 using NewNerdStore.Core.Messages.Commons.Notifications.Errors;
 using NewNerdStore.Vendas.Application.Comunication.Commands;
+using NewNerdStore.Vendas.Application.ComunicationBridge.Commands;
 using NewNerdStore.Vendas.Application.ComunicationBridge.Queries.Pedido;
 
 namespace NewNerdStore.WebApp.MVC.Controllers
@@ -60,6 +61,58 @@ namespace NewNerdStore.WebApp.MVC.Controllers
             TempData["Erros"] = ObterMensagensErro();
             return RedirectToAction("ProdutoDetalhe", "Vitrine", new {produtoId});
 
+        }
+
+
+        [HttpPost]
+        [Route("remover-item")]
+        public async Task<IActionResult> RemoverItem(Guid id)
+        {
+            var produto = await _produtoAppService.ObterPorId(id);
+            if (produto == null) return BadRequest();
+
+            var command = new RemoverItemPedidoCommand(TokenClienteId, id);
+            var isCommandChangeStatusEntity = await _commandMediatorStrategy.Send(command);
+
+            if (OperacaoValida())
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View("Index", await _pedidoQuery.ObterCarrinhoCliente(TokenClienteId));
+        }
+
+        [HttpPost]
+        [Route("atualizar-item")]
+        public async Task<IActionResult> AtualizarItem(Guid id, int quantidade)
+        {
+            var produto = await _produtoAppService.ObterPorId(id);
+            if (produto == null) return BadRequest();
+
+            var command = new AtualizarItemPedidoCommand(TokenClienteId, id, quantidade);
+            var isCommandChangeStatusEntity = await _commandMediatorStrategy.Send(command);
+
+            if (OperacaoValida())
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View("Index", await _pedidoQuery.ObterCarrinhoCliente(TokenClienteId));
+        }
+
+        [HttpPost]
+        [Route("aplicar-voucher")]
+        public async Task<IActionResult> AplicarVoucher(string voucherCodigo)
+        {
+            var command = new AplicarVoucherPedidoCommand(TokenClienteId, voucherCodigo);
+            var isCommandChangeStatusEntity = await _commandMediatorStrategy.Send(command);
+
+            if (OperacaoValida())
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View("Index", await _pedidoQuery.ObterCarrinhoCliente(TokenClienteId));
         }
     }
 }

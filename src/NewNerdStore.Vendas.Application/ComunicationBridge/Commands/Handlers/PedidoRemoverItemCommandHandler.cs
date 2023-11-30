@@ -50,7 +50,7 @@ namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
 
             pedido.RemoverItem(pedidoItem);
             _notificationEventManager
-                .AddNotificationEvent(new PedidoProdutoRemovidoEvent(message.ClienteId, pedido.Id, message.ProdutoId));
+                .AddNotificationEvent(new PedidoProdutoRemovidoDomainEvent(message.ClienteId, pedido.Id, message.ProdutoId));
 
             _pedidoRepository.RemoverItem(pedidoItem);
             _pedidoRepository.Atualizar(pedido);

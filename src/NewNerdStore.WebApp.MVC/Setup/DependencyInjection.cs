@@ -73,7 +73,8 @@ namespace NewNerdStore.WebApp.MVC.Setup
             services.AddScoped<INotificationHandler<PedidoRascunhoIniciadoDomainEvent>, PedidoEventHandler>();
             services.AddScoped<INotificationHandler<PedidoRascunhoAtualizadoDomainEvent>, PedidoEventHandler>();
             services.AddScoped<INotificationHandler<PedidoItemAdicionadoDomainEvent>, PedidoEventHandler>();
-            services.AddScoped<INotificationHandler<PedidoProdutoRemovidoEvent>, PedidoEventHandler>();
+            services.AddScoped<INotificationHandler<PedidoProdutoRemovidoDomainEvent>, PedidoEventHandler>();
+            services.AddScoped<INotificationHandler<VoucherAplicadoPedidoDomainEvent>, PedidoEventHandler>();
 
             #endregion
 
