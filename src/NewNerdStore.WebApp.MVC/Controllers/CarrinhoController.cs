@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NerdStore.Vendas.Application.Queries.Dtos;
 using NewNerdStore.Catalogos.Application.AppServices.Interfaces;
 using NewNerdStore.Core.Comunications.Mediator.Interfaces;
 using NewNerdStore.Core.Messages.Commons.Notifications.Errors;
@@ -113,6 +114,31 @@ namespace NewNerdStore.WebApp.MVC.Controllers
             }
 
             return View("Index", await _pedidoQuery.ObterCarrinhoCliente(TokenClienteId));
+        }
+
+        [Route("resumo-da-compra")]
+        public async Task<IActionResult> ResumoDaCompra()
+        {
+            return View(await _pedidoQuery.ObterCarrinhoCliente(TokenClienteId));
+        }
+
+        [HttpPost]
+        [Route("iniciar-pedido")]
+        public async Task<IActionResult> IniciarPedido(CarrinhoDto carrinhoDto)
+        {
+            var carrinho = await _pedidoQuery.ObterCarrinhoCliente(TokenClienteId);
+
+            var command = new IniciarPedidoCommand(carrinho.PedidoId, TokenClienteId, carrinho.ValorTotal, carrinhoDto.Pagamento.NomeCartao,
+                carrinhoDto.Pagamento.NumeroCartao, carrinhoDto.Pagamento.ExpiracaoCartao, carrinhoDto.Pagamento.CvvCartao);
+
+            await _commandMediatorStrategy.Send(command);
+
+            if (OperacaoValida())
+            {
+                return RedirectToAction("Index", "Pedido");
+            }
+
+            return View("ResumoDaCompra", await _pedidoQuery.ObterCarrinhoCliente(TokenClienteId));
         }
     }
 }

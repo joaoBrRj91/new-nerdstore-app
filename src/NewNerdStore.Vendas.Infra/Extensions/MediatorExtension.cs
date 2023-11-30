@@ -11,7 +11,7 @@ namespace NewNerdStore.Vendas.Infra.Extensions
 {
     public static class MediatorExtension
     {
-        public static async Task PublishEvents(this IDomainEventMediatorStrategy mediator, VendasContext ctx)
+        public static async Task PublishEvents(this IEventMediatorStrategy mediator, VendasContext ctx)
         {
             //var domainEntities = ctx.ChangeTracker
             //    .Entries<Entity>()

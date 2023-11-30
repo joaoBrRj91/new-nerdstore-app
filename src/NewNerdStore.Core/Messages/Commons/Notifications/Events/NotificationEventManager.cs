@@ -9,9 +9,9 @@ namespace NewNerdStore.Core.Messages.Commons.Notifications.Events
 
         public IReadOnlyCollection<Event> NotificationEvents => _notificationEvents?.AsReadOnly();
 
-        private readonly IDomainEventMediatorStrategy _domainEventMediatorStrategy;
+        private readonly IEventMediatorStrategy _domainEventMediatorStrategy;
 
-        public NotificationEventManager(IDomainEventMediatorStrategy domainEventMediatorStrategy)
+        public NotificationEventManager(IEventMediatorStrategy domainEventMediatorStrategy)
         {
             _notificationEvents = new List<Event>();
             _domainEventMediatorStrategy = domainEventMediatorStrategy;

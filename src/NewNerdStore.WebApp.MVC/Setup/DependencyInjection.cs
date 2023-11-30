@@ -22,6 +22,8 @@ using NewNerdStore.Vendas.Application.ComunicationBridge.Events.Domain;
 using NerdStore.Vendas.Application.Events.Handler;
 using NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers;
 using NewNerdStore.Vendas.Application.ComunicationBridge.Commands;
+using NewNerdStore.Core.Messages.Commons.IntegrationEvents;
+using NerdStore.Core.Messages.CommonMessages.IntegrationEvents;
 
 namespace NewNerdStore.WebApp.MVC.Setup
 {
@@ -34,7 +36,7 @@ namespace NewNerdStore.WebApp.MVC.Setup
             #region Shared Kernel (Core)
 
             #region Mediator Strategies
-            services.AddScoped<IDomainEventMediatorStrategy, DomainEventMediatorStrategy>();
+            services.AddScoped<IEventMediatorStrategy, EventMediatorStrategy>();
             services.AddScoped<ICommandMediatorStrategy, CommandMediatorStrategy>();
             services.AddScoped<INotificationMediatorStrategy, NotificationMediatorStrategy>();
             services.AddScoped<INotificationEventManager, NotificationEventManager>();
@@ -51,8 +53,10 @@ namespace NewNerdStore.WebApp.MVC.Setup
 
             #region Domain Events Handlers (Mediator)
             services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueDomainEvent>, ProdutoAbaixoEstoqueDomainEventHandler>();
+            services.AddScoped<INotificationHandler<PedidoIniciadoEvent>, PedidoIniciadoIntegrationEventHandler>();
+
             #endregion
-           
+
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IProdutoAppService, ProdutoAppService>();
             services.AddScoped<IEstoqueService, EstoqueService>();
@@ -67,6 +71,8 @@ namespace NewNerdStore.WebApp.MVC.Setup
             services.AddScoped<IRequestHandler<AtualizarItemPedidoCommand, bool>, PedidoAtualizarItemCommandHandler>();
             services.AddScoped<IRequestHandler<RemoverItemPedidoCommand, bool>, PedidoRemoverItemCommandHandler>();
             services.AddScoped<IRequestHandler<AplicarVoucherPedidoCommand, bool>, PedidoAplicarVoucherCommandHandler>();
+            services.AddScoped<IRequestHandler<IniciarPedidoCommand, bool>, PedidoIniciadoCommandHandler>();
+
             #endregion
 
             #region Domain Events Handlers (Mediator)
@@ -75,6 +81,7 @@ namespace NewNerdStore.WebApp.MVC.Setup
             services.AddScoped<INotificationHandler<PedidoItemAdicionadoDomainEvent>, PedidoEventHandler>();
             services.AddScoped<INotificationHandler<PedidoProdutoRemovidoDomainEvent>, PedidoEventHandler>();
             services.AddScoped<INotificationHandler<VoucherAplicadoPedidoDomainEvent>, PedidoEventHandler>();
+            services.AddScoped<INotificationHandler<PedidoEstoqueRejeitadoEvent>, PedidoEventHandler>();
 
             #endregion
 

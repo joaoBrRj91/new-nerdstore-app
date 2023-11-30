@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="Comunications\Bus\" />
-    <Folder Include="Messages\Commons\IntegrationEvents\" />
   </ItemGroup>
 
 </Project>

@@ -4,11 +4,11 @@ using NewNerdStore.Core.Messages.Abstracts;
 
 namespace NewNerdStore.Core.Comunications.Mediator.Implementations
 {
-    public class DomainEventMediatorStrategy : IDomainEventMediatorStrategy
+    public class EventMediatorStrategy : IEventMediatorStrategy
     {
         private readonly IMediator _mediator;
 
-        public DomainEventMediatorStrategy(IMediator mediator)
+        public EventMediatorStrategy(IMediator mediator)
         {
             _mediator = mediator;
         }

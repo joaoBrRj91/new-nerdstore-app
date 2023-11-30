@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using NerdStore.Core.Messages.CommonMessages.IntegrationEvents;
 using NewNerdStore.Vendas.Application.ComunicationBridge.Events.Domain;
 
 namespace NerdStore.Vendas.Application.Events.Handler
@@ -10,7 +11,8 @@ namespace NerdStore.Vendas.Application.Events.Handler
         INotificationHandler<PedidoRascunhoAtualizadoDomainEvent>,
         INotificationHandler<PedidoItemAdicionadoDomainEvent>,
         INotificationHandler<PedidoProdutoRemovidoDomainEvent>,
-        INotificationHandler<VoucherAplicadoPedidoDomainEvent>
+        INotificationHandler<VoucherAplicadoPedidoDomainEvent>,
+        INotificationHandler<PedidoEstoqueRejeitadoEvent>
     {
 
         public Task Handle(PedidoRascunhoIniciadoDomainEvent notification, CancellationToken cancellationToken)
@@ -34,6 +36,11 @@ namespace NerdStore.Vendas.Application.Events.Handler
         }
 
         public Task Handle(VoucherAplicadoPedidoDomainEvent notification, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Handle(PedidoEstoqueRejeitadoEvent notification, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

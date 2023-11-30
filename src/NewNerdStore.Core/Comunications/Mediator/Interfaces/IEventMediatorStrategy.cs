@@ -2,7 +2,7 @@
 
 namespace NewNerdStore.Core.Comunications.Mediator.Interfaces
 {
-    public interface IDomainEventMediatorStrategy
+    public interface IEventMediatorStrategy
     {
         Task PublishEvent<T>(T @event) where T : Event;
     }
