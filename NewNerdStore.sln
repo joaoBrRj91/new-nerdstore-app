@@ -47,11 +47,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{626B17BD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1F436A12-76E3-4C6A-B4B2-BA4BB88B04C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewNerdStore.Vendas.Domain", "src\NewNerdStore.Vendas.Domain\NewNerdStore.Vendas.Domain.csproj", "{B900194D-217B-43FC-A31F-89864805D69F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewNerdStore.Vendas.Domain", "src\NewNerdStore.Vendas.Domain\NewNerdStore.Vendas.Domain.csproj", "{B900194D-217B-43FC-A31F-89864805D69F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewNerdStore.Vendas.Application", "src\NewNerdStore.Vendas.Application\NewNerdStore.Vendas.Application.csproj", "{22EC45E4-2218-4EA7-9A39-FAF167AD1E8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewNerdStore.Vendas.Application", "src\NewNerdStore.Vendas.Application\NewNerdStore.Vendas.Application.csproj", "{22EC45E4-2218-4EA7-9A39-FAF167AD1E8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewNerdStore.Vendas.Infra", "src\NewNerdStore.Vendas.Infra\NewNerdStore.Vendas.Infra.csproj", "{5981C0A4-EA9E-4E88-BD24-38E317DB3C4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewNerdStore.Vendas.Infra", "src\NewNerdStore.Vendas.Infra\NewNerdStore.Vendas.Infra.csproj", "{5981C0A4-EA9E-4E88-BD24-38E317DB3C4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewNerdStore.Pagamentos.AntiCorruption", "src\NewNerdStore.Pagamentos.AntiCorruption\NewNerdStore.Pagamentos.AntiCorruption.csproj", "{5EBCC70B-0D8B-472F-9B2C-77C2F3FF461C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewNerdStore.Pagamentos.Business", "src\NewNerdStore.Pagamentos.Business\NewNerdStore.Pagamentos.Business.csproj", "{0AFB1351-C776-457F-BECB-A950F70B2707}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewNerdStore.Pagamentos.Data", "src\NewNerdStore.Pagamentos.Data\NewNerdStore.Pagamentos.Data.csproj", "{9008720C-06DC-4A7B-A9B3-DD0A31926289}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +101,18 @@ Global
 		{5981C0A4-EA9E-4E88-BD24-38E317DB3C4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5981C0A4-EA9E-4E88-BD24-38E317DB3C4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5981C0A4-EA9E-4E88-BD24-38E317DB3C4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EBCC70B-0D8B-472F-9B2C-77C2F3FF461C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EBCC70B-0D8B-472F-9B2C-77C2F3FF461C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EBCC70B-0D8B-472F-9B2C-77C2F3FF461C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EBCC70B-0D8B-472F-9B2C-77C2F3FF461C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AFB1351-C776-457F-BECB-A950F70B2707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AFB1351-C776-457F-BECB-A950F70B2707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AFB1351-C776-457F-BECB-A950F70B2707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AFB1351-C776-457F-BECB-A950F70B2707}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9008720C-06DC-4A7B-A9B3-DD0A31926289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9008720C-06DC-4A7B-A9B3-DD0A31926289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9008720C-06DC-4A7B-A9B3-DD0A31926289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9008720C-06DC-4A7B-A9B3-DD0A31926289}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +141,9 @@ Global
 		{B900194D-217B-43FC-A31F-89864805D69F} = {9D3882EB-930C-4FA0-9CDC-1B0C4115DFA2}
 		{22EC45E4-2218-4EA7-9A39-FAF167AD1E8F} = {2F7502D5-7F23-4BC5-92AA-8BDD99C4173D}
 		{5981C0A4-EA9E-4E88-BD24-38E317DB3C4B} = {626B17BD-02D6-429D-961B-2B3153C31FDE}
+		{5EBCC70B-0D8B-472F-9B2C-77C2F3FF461C} = {4059E879-4AB4-4A86-B582-C0FB48937D89}
+		{0AFB1351-C776-457F-BECB-A950F70B2707} = {4059E879-4AB4-4A86-B582-C0FB48937D89}
+		{9008720C-06DC-4A7B-A9B3-DD0A31926289} = {4059E879-4AB4-4A86-B582-C0FB48937D89}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {057BCEDF-ED43-42D0-9633-A782177DC9A9}

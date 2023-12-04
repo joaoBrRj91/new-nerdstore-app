@@ -24,6 +24,10 @@ using NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers;
 using NewNerdStore.Vendas.Application.ComunicationBridge.Commands;
 using NewNerdStore.Core.Messages.Commons.IntegrationEvents;
 using NerdStore.Core.Messages.CommonMessages.IntegrationEvents;
+using NerdStore.Pagamentos.AntiCorruption;
+using NerdStore.Pagamentos.Business;
+using NerdStore.Pagamentos.Data.Repository;
+using NerdStore.Pagamentos.Data;
 
 namespace NewNerdStore.WebApp.MVC.Setup
 {
@@ -91,6 +95,16 @@ namespace NewNerdStore.WebApp.MVC.Setup
              options.UseSqlServer(connectionString));
             #endregion
 
+
+            #region Bounded Context Pagamentos
+            services.AddScoped<IPagamentoRepository, PagamentoRepository>();
+            services.AddScoped<IPagamentoService, PagamentoService>();
+            services.AddScoped<IPagamentoCartaoCreditoFacade, PagamentoCartaoCreditoFacade>();
+            services.AddScoped<IPayPalGateway, PayPalGateway>();
+            services.AddScoped<IConfigurationManager, NerdStore.Pagamentos.AntiCorruption.ConfigurationManager>();
+            services.AddDbContext<PagamentoContext>(options =>
+             options.UseSqlServer(connectionString));
+            #endregion
         }
     }
 }
