@@ -58,6 +58,7 @@ namespace NewNerdStore.WebApp.MVC.Setup
             #region Domain Events Handlers (Mediator)
             services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueDomainEvent>, ProdutoAbaixoEstoqueDomainEventHandler>();
             services.AddScoped<INotificationHandler<PedidoIniciadoEvent>, PedidoIniciadoIntegrationEventHandler>();
+            services.AddScoped<INotificationHandler<PedidoProcessamentoCanceladoEvent>, PedidoProcessamentoCanceladoIntegrationEventHandler>();
 
             #endregion
 
@@ -76,7 +77,9 @@ namespace NewNerdStore.WebApp.MVC.Setup
             services.AddScoped<IRequestHandler<RemoverItemPedidoCommand, bool>, PedidoRemoverItemCommandHandler>();
             services.AddScoped<IRequestHandler<AplicarVoucherPedidoCommand, bool>, PedidoAplicarVoucherCommandHandler>();
             services.AddScoped<IRequestHandler<IniciarPedidoCommand, bool>, PedidoIniciadoCommandHandler>();
-
+            services.AddScoped<IRequestHandler<CancelarProcessamentoPedidoCommand, bool>, PedidoCancelarProcessamentoCommandHandler>();
+            services.AddScoped<IRequestHandler<FinalizarPedidoCommand, bool>, PedidoFinalizadoCommandHandler>();
+            services.AddScoped<IRequestHandler<CancelarProcessamentoPedidoEstornarEstoqueCommand, bool>, PedidoCancelarProcessamentoEstornarEstoqueCommandHandler>();
             #endregion
 
             #region Domain Events Handlers (Mediator)
@@ -86,6 +89,8 @@ namespace NewNerdStore.WebApp.MVC.Setup
             services.AddScoped<INotificationHandler<PedidoProdutoRemovidoDomainEvent>, PedidoEventHandler>();
             services.AddScoped<INotificationHandler<VoucherAplicadoPedidoDomainEvent>, PedidoEventHandler>();
             services.AddScoped<INotificationHandler<PedidoEstoqueRejeitadoEvent>, PedidoEventHandler>();
+            services.AddScoped<INotificationHandler<PagamentoRealizadoEvent>, PedidoEventHandler>();
+            services.AddScoped<INotificationHandler<PagamentoRecusadoEvent>, PedidoEventHandler>();
 
             #endregion
 
