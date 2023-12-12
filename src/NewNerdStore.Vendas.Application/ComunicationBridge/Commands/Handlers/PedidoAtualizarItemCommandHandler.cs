@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using NewNerdStore.Core.Comunications.Mediator.Implementations;
 using NewNerdStore.Core.Comunications.Mediator.Interfaces;
 using NewNerdStore.Core.Messages.Commons.Notifications.Errors;
+using NewNerdStore.Vendas.Application.ComunicationBridge.Events.Domain;
 using NewNerdStore.Vendas.Domain.Interfaces.Repositories;
 
 namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
@@ -9,13 +11,16 @@ namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
         IRequestHandler<AtualizarItemPedidoCommand, bool>, IDisposable
     {
         private readonly IPedidoRepository _pedidoRepository;
+        private readonly IEventMediatorStrategy _eventMediatorStrategy;
 
         public PedidoAtualizarItemCommandHandler(
             IPedidoRepository pedidoRepository,
-            INotificationMediatorStrategy notificationMediatorStrategy)
+            INotificationMediatorStrategy notificationMediatorStrategy,
+            IEventMediatorStrategy eventMediatorStrategy)
             : base(notificationMediatorStrategy)
         {
             _pedidoRepository = pedidoRepository;
+            _eventMediatorStrategy = eventMediatorStrategy;
         }
 
         //TODO : REFACTORING EXTRACT METHOD PRIVATE BUSINESS RULES SEGREGATIONS
@@ -25,17 +30,17 @@ namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
 
             var pedido = await _pedidoRepository.ObterPedidoRascunhoPorClienteId(message.ClienteId);
 
-            if(pedido == null)
+            if (pedido == null)
             {
-                 PublishDomainErrorNotification
-                    (new DomainErrorNotifications(key: "Pedido", value: "Pedido não encontrado!"));
+                PublishDomainErrorNotification
+                   (new DomainErrorNotifications(key: "Pedido", value: "Pedido não encontrado!"));
 
                 return false;
             }
 
             var pedidoItem = await _pedidoRepository.ObterItemPorPedido(pedido.Id, message.ProdutoId);
 
-            if(!pedido.PedidoItemExistente(pedidoItem))
+            if (!pedido.PedidoItemExistente(pedidoItem))
             {
                 PublishDomainErrorNotification
                     (new DomainErrorNotifications(key: "Pedido", value: "Item do pedido não encontrado!"));
@@ -43,8 +48,11 @@ namespace NewNerdStore.Vendas.Application.ComunicationBridge.Commands.Handlers
 
             pedido.AtualizarUnidades(pedidoItem, message.Quantidade);
 
+           await  _eventMediatorStrategy
+                .PublishEvent(new PedidoProdutoAtualizadoDomainEvent(message.ClienteId, pedido.Id,message.ProdutoId, message.Quantidade));
+
             _pedidoRepository.AtualizarItem(pedidoItem);
-            //_pedidoRepository.Atualizar(pedido);
+            _pedidoRepository.Atualizar(pedido);
 
             return await _pedidoRepository.UnitOfWork.Commit();
         }

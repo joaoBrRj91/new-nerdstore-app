@@ -28,6 +28,10 @@ using NerdStore.Pagamentos.AntiCorruption;
 using NerdStore.Pagamentos.Business;
 using NerdStore.Pagamentos.Data.Repository;
 using NerdStore.Pagamentos.Data;
+using EventSourcing.Interfaces;
+using EventSourcing;
+using IConfigurationManager = NerdStore.Pagamentos.AntiCorruption.IConfigurationManager;
+using ConfigurationManager = NerdStore.Pagamentos.AntiCorruption.ConfigurationManager;
 
 namespace NewNerdStore.WebApp.MVC.Setup
 {
@@ -100,15 +104,18 @@ namespace NewNerdStore.WebApp.MVC.Setup
              options.UseSqlServer(connectionString));
             #endregion
 
-
             #region Bounded Context Pagamentos
             services.AddScoped<IPagamentoRepository, PagamentoRepository>();
             services.AddScoped<IPagamentoService, PagamentoService>();
             services.AddScoped<IPagamentoCartaoCreditoFacade, PagamentoCartaoCreditoFacade>();
             services.AddScoped<IPayPalGateway, PayPalGateway>();
-            services.AddScoped<IConfigurationManager, NerdStore.Pagamentos.AntiCorruption.ConfigurationManager>();
+            services.AddScoped<IConfigurationManager, ConfigurationManager>();
             services.AddDbContext<PagamentoContext>(options =>
              options.UseSqlServer(connectionString));
+            #endregion
+
+            #region Event Sourcing
+            services.AddSingleton<IEventStoreService, EventStoreService>();
             #endregion
         }
     }

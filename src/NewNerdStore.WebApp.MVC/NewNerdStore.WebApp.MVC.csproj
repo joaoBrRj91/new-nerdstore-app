@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EventSourcing\EventSourcing.csproj" />
     <ProjectReference Include="..\NewNerdStore.Catalogos.Application\NewNerdStore.Catalogos.Application.csproj" />
     <ProjectReference Include="..\NewNerdStore.Pagamentos.AntiCorruption\NewNerdStore.Pagamentos.AntiCorruption.csproj" />
     <ProjectReference Include="..\NewNerdStore.Pagamentos.Data\NewNerdStore.Pagamentos.Data.csproj" />
