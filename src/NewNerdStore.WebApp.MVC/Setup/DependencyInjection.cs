@@ -32,6 +32,7 @@ using EventSourcing.Interfaces;
 using EventSourcing;
 using IConfigurationManager = NerdStore.Pagamentos.AntiCorruption.IConfigurationManager;
 using ConfigurationManager = NerdStore.Pagamentos.AntiCorruption.ConfigurationManager;
+using NewNerdStore.Core.Data.EventSourcing;
 
 namespace NewNerdStore.WebApp.MVC.Setup
 {
@@ -116,6 +117,8 @@ namespace NewNerdStore.WebApp.MVC.Setup
 
             #region Event Sourcing
             services.AddSingleton<IEventStoreService, EventStoreService>();
+            services.AddSingleton<IEventSourcingRepository, EventSourcingRepository>();
+
             #endregion
         }
     }

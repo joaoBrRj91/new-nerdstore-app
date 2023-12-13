@@ -22,7 +22,7 @@ namespace EventSourcing
 
         public IEventStoreConnection GetConnection()
         {
-            throw new NotImplementedException();
+            return _connection;
         }
     }
 }
