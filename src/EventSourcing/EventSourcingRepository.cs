@@ -29,7 +29,7 @@ namespace EventSourcing
         public async Task<IEnumerable<StoreEvent>> ObterEventos(Guid aggregateId)
         {
             var eventos = await _eventStoreService.GetConnection()
-               .ReadStreamEventsForwardAsync(aggregateId.ToString(), 0, 500, false);
+               .ReadStreamEventsBackwardAsync(aggregateId.ToString(), 0, 500, false);
 
             var listaEventos = new List<StoreEvent>();
 

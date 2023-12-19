@@ -63,6 +63,7 @@ namespace NewNerdStore.Vendas.Application.ComunicationBridge.Queries.Pedido
             {
                 pedidosDto.Add(new PedidoDto
                 {
+                    Id = pedido.Id,
                     ValorTotal = pedido.ValorTotal,
                     PedidoStatus = (int)pedido.PedidoStatus,
                     Codigo = pedido.Codigo,
